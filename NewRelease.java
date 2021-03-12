@@ -1,11 +1,11 @@
 public class NewRelease extends MovieType{
     @Override
-    public int calculateBaseRent() {
+    public double calculateBaseRent() {
         return 0;
     }
 
     @Override
-    public int calculateExtendedRent() {
-        return 0;
+    public double calculateExtendedRent(int daysRented) {
+        return daysRented * 3;
     }
 }

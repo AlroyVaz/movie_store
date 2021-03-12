@@ -1,12 +1,12 @@
 public class Childrens extends MovieType{
 
     @Override
-    public int calculateBaseRent() {
-        return 0;
+    public double calculateBaseRent() {
+        return 1.5;
     }
 
     @Override
-    public int calculateExtendedRent() {
-        return 0;
+    public double calculateExtendedRent(int daysRented) {
+        return (daysRented - 1.5) * 3;
     }
 }

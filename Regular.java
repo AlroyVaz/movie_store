@@ -1,11 +1,11 @@
 public class Regular extends MovieType{
     @Override
-    public int calculateBaseRent() {
-        return 0;
+    public double calculateBaseRent() {
+        return 2;
     }
 
     @Override
-    public int calculateExtendedRent() {
-        return 0;
+    public double calculateExtendedRent(int daysRented) {
+        return (daysRented - 2) * 1.5;
     }
 }
