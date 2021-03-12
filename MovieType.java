@@ -1,4 +1,4 @@
-public interface MovieType {
-    int rentalAmount = 0;
-    
+public abstract  class MovieType {
+    public abstract int calculateBaseRent();
+    public abstract int calculateExtendedRent();
 }
