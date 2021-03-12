@@ -1,22 +1,22 @@
 public class Movie {
-    public static final int CHILDRENS   = 2;
-    public static final int REGULAR     = 0;
-    public static final int NEW_RELEASE = 1;
+//    public static final int CHILDRENS   = 2;
+//    public static final int REGULAR     = 0;
+//    public static final int NEW_RELEASE = 1;
 
     private String movieTitle;      // variable name changed
-    private int movieType;          // variable name changed
+    private MovieType movieType;          // variable name changed
 
-    public Movie(String title, int type) {
+    public Movie(String title, MovieType type) {
         movieTitle = title;
         movieType = type;
     }
 
-    public int getPriceCode() {
+    public MovieType getMovieType() {
         return movieType;
     }
 
-    public void setPriceCode(int arg) {
-        movieType = arg;
+    public void setPriceCode(MovieType movieType) {
+        movieType = movieType;      // variable name change
     }
 
     public String getTitle() {

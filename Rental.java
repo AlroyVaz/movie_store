@@ -14,4 +14,12 @@ public class Rental {
     public Movie getMovie() {
         return _movie;
     }
+
+    public double calculateRent(){
+        return 0;
+    }
+
+    public double calculateExtendedRent(){
+        return 0;
+    }
 }
