@@ -15,11 +15,15 @@ public class Rental {
         return _movie;
     }
 
-    public double calculateRent(){
-        return 0;
+    public double calculateRent(){ // method extracted and moved
+        return _movie.getMovieType().calculateBaseRent();
     }
 
-    public double calculateExtendedRent(){
-        return 0;
+    public double calculateExtendedRent(){  // method extracted and moved
+        return _movie.getMovieType().calculateExtendedRent(_daysRented);
+    }
+
+    public int getFrequentRenterPoints(){   // method extracted and moved
+        return _movie.getMovieType().getFrequentRenterPoints();
     }
 }

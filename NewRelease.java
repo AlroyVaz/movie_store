@@ -8,4 +8,9 @@ public class NewRelease extends MovieType{
     public double calculateExtendedRent(int daysRented) {
         return daysRented * 3;
     }
+
+    @Override
+    public int getFrequentRenterPoints() {
+        return 2;
+    }
 }

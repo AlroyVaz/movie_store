@@ -9,4 +9,9 @@ public class Childrens extends MovieType{
     public double calculateExtendedRent(int daysRented) {
         return (daysRented - 1.5) * 3;
     }
+
+    @Override
+    public int getFrequentRenterPoints() {
+        return 1;
+    }
 }
