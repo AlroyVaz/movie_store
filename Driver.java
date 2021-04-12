@@ -10,6 +10,8 @@ public class Driver {
         customer.addRental(new Rental(m3, 5));
 
         System.out.println(customer.generateBill());
+
+        System.out.println("\n\n-------XML format--------");
         System.out.println(customer.generateXML());
     }
 }
