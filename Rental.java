@@ -2,9 +2,14 @@ public class Rental {
     private Movie _movie;
     private int   _daysRented;
 
-    public Rental(Movie movie, int daysRented) {
+    RentalStrategy rentalStrategy;
+    FrequentRenterPointsStrategy frequentRenterPointsStrategy;
+
+    public Rental(Movie movie, int daysRented, RentalStrategy rentalStrategy, FrequentRenterPointsStrategy frequentRenterPointsStrategy) {
         _movie      = movie;
         _daysRented = daysRented;
+        this.rentalStrategy = rentalStrategy;
+        this.frequentRenterPointsStrategy = frequentRenterPointsStrategy;
     }
 
     public int getDaysRented() {
@@ -16,14 +21,11 @@ public class Rental {
     }
 
     public double calculateRent(){ // method extracted and moved
-        return _movie.getMovieType().calculateBaseRent();
+        return rentalStrategy.calculateRent(_daysRented);
     }
 
-    public double calculateExtendedRent(){  // method extracted and moved
-        return _movie.getMovieType().calculateExtendedRent(_daysRented);
-    }
 
     public int getFrequentRenterPoints(){   // method extracted and moved
-        return _movie.getMovieType().getFrequentRenterPoints();
+        return frequentRenterPointsStrategy.calculateFrequentRenterPoints(_daysRented);
     }
 }

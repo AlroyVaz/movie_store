@@ -49,7 +49,7 @@ public class Customer {
     }
 
     private double getCharge(Rental rental){
-        return rental.calculateRent() + rental.calculateExtendedRent();
+        return rental.calculateRent();
     }
 
     public String generateXML(){
