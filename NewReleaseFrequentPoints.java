@@ -1,9 +1,9 @@
 public class NewReleaseFrequentPoints implements FrequentRenterPointsStrategy{
     @Override
-    public int calculateFrequentRenterPoints(int daysRented) {
+    public int calculateFrequentRenterPoints(int daysRented, int frequentRenterPoints) {
         if(daysRented > 1){
-            return 2;
+            return frequentRenterPoints+2;
         }
-        return 1;
+        return frequentRenterPoints+1;
     }
 }

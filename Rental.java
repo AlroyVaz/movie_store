@@ -5,7 +5,9 @@ public class Rental {
     RentalStrategy rentalStrategy;
     FrequentRenterPointsStrategy frequentRenterPointsStrategy;
 
-    public Rental(Movie movie, int daysRented, RentalStrategy rentalStrategy, FrequentRenterPointsStrategy frequentRenterPointsStrategy) {
+    public Rental(Movie movie, int daysRented, RentalStrategy rentalStrategy,
+                  FrequentRenterPointsStrategy frequentRenterPointsStrategy
+    ) {
         _movie      = movie;
         _daysRented = daysRented;
         this.rentalStrategy = rentalStrategy;
@@ -25,7 +27,7 @@ public class Rental {
     }
 
 
-    public int getFrequentRenterPoints(){   // method extracted and moved
-        return frequentRenterPointsStrategy.calculateFrequentRenterPoints(_daysRented);
-    }
+//    public int getFrequentRenterPoints(){   // method extracted and moved
+//        return frequentRenterPointsStrategy.calculateFrequentRenterPoints(this);
+//    }
 }
