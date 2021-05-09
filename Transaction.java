@@ -35,9 +35,9 @@ public class Transaction {
 
         if(set.size() > 1){
             frequentRenterPoints = new TwoMovieTypesFrequentPoints().calculateFrequentRenterPoints(0, frequentRenterPoints);
-            if(customer.getAge() > 17 && customer.getAge() < 23){
-                frequentRenterPoints = new AgeFrequentPoints().calculateFrequentRenterPoints(0, frequentRenterPoints);
-            }
+        }
+        if(customer.getAge() > 17 && customer.getAge() < 23 && set.contains("NewReleaseRental")){
+            frequentRenterPoints = new AgeFrequentPoints().calculateFrequentRenterPoints(0, frequentRenterPoints);
         }
     }
 
