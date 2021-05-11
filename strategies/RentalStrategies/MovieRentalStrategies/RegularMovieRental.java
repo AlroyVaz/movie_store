@@ -1,4 +1,8 @@
-public class RegularRental implements RentalStrategy {
+package strategies.RentalStrategies.MovieRentalStrategies;
+
+import strategies.RentalStrategies.RentalStrategy;
+
+public class RegularMovieRental implements RentalStrategy {
     @Override
     public double calculateRent(int daysRented) {
         double rent = 2;

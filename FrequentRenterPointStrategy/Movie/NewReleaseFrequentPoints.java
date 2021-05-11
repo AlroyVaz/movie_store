@@ -1,4 +1,8 @@
-public class NewReleaseFrequentPoints implements FrequentRenterPointsStrategy{
+package FrequentRenterPointStrategy.Movie;
+
+import FrequentRenterPointStrategy.FrequentRenterPointsStrategy;
+
+public class NewReleaseFrequentPoints implements FrequentRenterPointsStrategy {
     @Override
     public int calculateFrequentRenterPoints(int daysRented, int frequentRenterPoints) {
         if(daysRented > 1){

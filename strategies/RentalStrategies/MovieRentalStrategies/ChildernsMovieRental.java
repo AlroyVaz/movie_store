@@ -1,4 +1,8 @@
-public class ChildernsRental implements RentalStrategy {
+package strategies.RentalStrategies.MovieRentalStrategies;
+
+import strategies.RentalStrategies.RentalStrategy;
+
+public class ChildernsMovieRental implements RentalStrategy {
     @Override
     public double calculateRent(int daysRented) {
         double rent = 1.5;

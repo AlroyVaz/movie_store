@@ -1,79 +1,53 @@
+import FrequentRenterPointStrategy.FrequentRenterPointsStrategy;
+import TransactionItems.TransactionItem;
+import strategies.PurchaseStrategies.PurchaseStrategy;
+
 import java.util.*;
 
 public class Transaction {
     Customer customer;
-    List<Rental> rentalList;
+    Map<TransactionItem, Double> transactionItems;
+
     double totalCharge = 0;
     int frequentRenterPoints;
 
     public Transaction(Customer customer){
         this.customer = customer;
         this.frequentRenterPoints = 0;
-        rentalList = new ArrayList<>();
+
+        this.transactionItems = new HashMap<>();
     }
 
-    public void addRental(Rental rental){
-        rentalList.add(rental);
+    // For Rental
+    public void addItem(TransactionItem item){
+        double charge = item.getPrice();
+        totalCharge += charge;
+        transactionItems.put(item, charge);
     }
 
-    public void getFrequentRenterPoints(){
-        Set<String> set = new HashSet<>();
-        for(Rental rental: rentalList){
-            RentalStrategy rentalStrategy = rental.rentalStrategy;
-            int daysRented = rental.getDaysRented();
-            if(rentalStrategy instanceof NewReleaseRental){
-                set.add("NewReleaseRental");
-                frequentRenterPoints = new NewReleaseFrequentPoints().calculateFrequentRenterPoints(daysRented, frequentRenterPoints);
-            }else if(rentalStrategy instanceof RegularRental){
-                set.add("RegularRental");
-                frequentRenterPoints = new RegularFrequentPoints().calculateFrequentRenterPoints(daysRented, frequentRenterPoints);
-            }else{
-                set.add("ChildrenRental");
-                frequentRenterPoints = new ChildrenFrequentPoints().calculateFrequentRenterPoints(daysRented, frequentRenterPoints);
-            }
-        }
+    public void addFrequentRenterPoints(FrequentRenterPointsStrategy frequentRenterPointsStrategy, int daysRented){
+        this.frequentRenterPoints = frequentRenterPointsStrategy.calculateFrequentRenterPoints(daysRented, this.frequentRenterPoints);
+    }
 
-        if(set.size() > 1){
-            frequentRenterPoints = new TwoMovieTypesFrequentPoints().calculateFrequentRenterPoints(0, frequentRenterPoints);
-        }
-        if(customer.getAge() > 17 && customer.getAge() < 23 && set.contains("NewReleaseRental")){
-            frequentRenterPoints = new AgeFrequentPoints().calculateFrequentRenterPoints(0, frequentRenterPoints);
-        }
+    // For Purchase
+    public void addItem(TransactionItem item, PurchaseStrategy purchaseStrategy){
+        double charge = purchaseStrategy.calculatePrice();
+        totalCharge += charge;
+        transactionItems.put(item, charge);
     }
 
     public String generateBill() {
-        StringBuilder result = new StringBuilder("Rental Record for " + customer.getName() + "\n"); // Data-type replacement
+        StringBuilder result = new StringBuilder("Transaction Record for " + customer.getName() + "\n");
 
-        for (Rental eachRental: rentalList){
-            double charge = eachRental.calculateRent();
-
+        for (TransactionItem item: transactionItems.keySet()){
             // show figures for this rental
-            result.append("\t" + eachRental.getMovie().getTitle() +
-                    "\t" + String.valueOf(charge) + "\n");
-            totalCharge += charge;
+            result.append("\t" + item.getItem().getTitle() +
+                    "\t" + String.valueOf(transactionItems.get(item)) + "\n");
         }
 
         // add footer lines
         result.append("Amount owed is " + String.valueOf(totalCharge) + "\n");
-        getFrequentRenterPoints();
-        result.append("You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points");
+        result.append("You earned " + String.valueOf(this.frequentRenterPoints) + " frequent renter points");
         return result.toString();
-    }
-
-    public String generateXML(){
-        StringBuilder xml = new StringBuilder();
-        xml.append("<name>" + customer.getName() + "</name>\n");
-
-        for (Rental eachRental: rentalList){
-            xml.append("<movie>\n");
-            xml.append("\t<title>" + eachRental.getMovie().getTitle()+ "</title>\n");
-            xml.append("\t<charge>" + eachRental.calculateRent()+ "</charge>\n");
-            xml.append("</movie>\n");
-        }
-
-        xml.append("<totalCharge>" + totalCharge + "</totalCharge>\n");
-        xml.append("<frequentRenterPoints>" + frequentRenterPoints + "</frequentRenterPoints>\n");
-
-        return xml.toString();
     }
 }
